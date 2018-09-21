@@ -1,0 +1,33 @@
+<div class= "container">
+    <h1 class="jumbotron text-center">Bridgette's Wacky Widgets</h1>
+    <% if @widgets.count > 0 %>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+
+            <% @widgets.each do |widget| %>
+        <tbody>
+            <tr>
+                <td><%= widget.description %></td>
+                <td><%= widget.quantity %></td>
+                <td><%= link_to "X", widget_path(widget), method: :delete, data: { confirm: 'Delete this entry?' }, class: "btn btn-xs btn-danger" %></td>
+            </tr>
+        <% end %>
+            <tr>
+                <td>Total Quantity:</td>
+                <td><%= @widgets.sum(:quantity) %></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <% else %>
+        <h3 class="text-center">No Widgets Exist</h3>
+</div>
+    <% end  %>
+<%= render "partials/form" %>
